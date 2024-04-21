@@ -24,6 +24,7 @@ fetchBreeds()
 select.addEventListener('change', (ev) => {
 	console.log(ev.target.value);
 });
+//te poniżej są, żeby sprawdzić, czy działa
 getCatPhotoByBreed('awir').then((data) => {
 	console.log(data[0].url);
 });
