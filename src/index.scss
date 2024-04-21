@@ -1,0 +1,43 @@
+body {
+	padding-top: 50px;
+	text-align: center;
+}
+
+select {
+	width: 200px;
+	height: 30px;
+}
+.hidden {
+	display: none;
+}
+
+.breed-select {
+	text-align: center;
+	font-size: 16px;
+}
+.cat-photo {
+	width: 400px;
+	box-shadow: 5px 5px 5px lightgrey;
+}
+.cat-wrapper {
+	padding-top: 50px;
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+}
+
+.cat-info {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	max-width: 500px;
+
+	&__name {
+		text-transform: uppercase;
+	}
+
+	&__temperament-name {
+		font-weight: 700;
+	}
+}
