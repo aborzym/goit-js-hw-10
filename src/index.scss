@@ -8,6 +8,11 @@ select {
 	height: 30px;
 }
 
+img {
+	max-width: 50%;
+	height: auto;
+	box-shadow: 5px 5px 5px lightgrey;
+}
 .error {
 	color: red;
 }
@@ -25,11 +30,6 @@ select {
 	display: flex;
 	gap: 2rem;
 	justify-content: center;
-
-	&__photo {
-		width: 400px;
-		box-shadow: 5px 5px 5px lightgrey;
-	}
 
 	&__description {
 		text-align: left;
