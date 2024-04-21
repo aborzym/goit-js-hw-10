@@ -7,6 +7,11 @@ select {
 	width: 200px;
 	height: 30px;
 }
+
+.error {
+	color: red;
+}
+
 .hidden {
 	display: none;
 }
@@ -15,29 +20,33 @@ select {
 	text-align: center;
 	font-size: 16px;
 }
-.cat-photo {
-	width: 400px;
-	box-shadow: 5px 5px 5px lightgrey;
-}
-.cat-wrapper {
+.cat-info {
 	padding-top: 50px;
 	display: flex;
 	gap: 2rem;
 	justify-content: center;
-}
 
-.cat-info {
-	text-align: left;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	max-width: 500px;
-
-	&__name {
-		text-transform: uppercase;
+	&__photo {
+		width: 400px;
+		box-shadow: 5px 5px 5px lightgrey;
 	}
 
-	&__temperament-name {
+	&__description {
+		text-align: left;
+		line-height: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		max-width: 500px;
+	}
+}
+.cat-name {
+	text-transform: uppercase;
+}
+
+.cat-temperament {
+	font-style: italic;
+	&__name {
 		font-weight: 700;
 	}
 }
