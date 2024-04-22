@@ -82,6 +82,17 @@ img {
 		font-weight: 700;
 	}
 }
+// Dostosowanie wyglądu rozwijanej listy
+.ss-main {
+	background-color: #f0f0f0;
+	border: 1px solid red;
+	border-radius: 15px;
+}
+// Dostosowanie wyglądu pola wyboru
+.ss-single-selected {
+	color: red;
+	font-weight: 100;
+}
 
 .hidden {
 	display: none;

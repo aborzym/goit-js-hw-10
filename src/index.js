@@ -3,6 +3,11 @@ import axios from 'axios';
 axios.defaults.headers.common['x-api-key'] =
 	'live_i91leozVNIE98NugOCrDU2RPcZl4xEUJguzWlynsfs5mQeJI4TAskccLiIN1comy';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import SlimSelect from 'slim-select';
+
+document.addEventListener('DOMContentLoaded', function () {
+	new SlimSelect('.breed-select');
+});
 
 const select = document.querySelector('select.breed-select');
 const loader = document.querySelector('p.loader');
