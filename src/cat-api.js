@@ -11,15 +11,13 @@ export function fetchBreeds() {
 //Napisz funkcję fetchCatByBreed(breedId), która oczekuje identyfikatora rasy, wykonuje żądanie HTTP i zwraca obietnicę z danymi o kocie - wynikiem żądania. Umieść ją w pliku cat-api.js i dokonaj nazwanego eksportu.
 
 export function fetchCatByBreed(breedId) {
-	return axios
-		.get('https://api.thecatapi.com/v1/breeds')
-		.then((breeds) => {
-			return breeds.data.find((el) => el.id === breedId);
-		})
-		.catch((error) => {
-			console.error('Error downloading cat data', error);
-			throw error;
-		});
+	return axios.get('https://api.thecatapi.com/v1/breeds').then((breeds) => {
+		return breeds.data.find((el) => el.id === breedId);
+	});
+	// .catch((error) => {
+	// 	console.error('Error downloading cat data', error);
+	// 	throw error;
+	// });
 }
 
 export function getCatPhotoByBreed(breedId) {
@@ -27,9 +25,9 @@ export function getCatPhotoByBreed(breedId) {
 		.get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
 		.then((info) => {
 			return info.data;
-		})
-		.catch((error) => {
-			console.error('Error downloading photo', error);
-			throw error;
 		});
+	// .catch((error) => {
+	// 	console.error('Error downloading photo', error);
+	// 	throw error;
+	// });
 }

@@ -20,7 +20,8 @@
   "dependencies": {
     "axios": "^1.6.8",
     "caniuse-lite": "^1.0.30001611",
-    "modern-normalize": "^1.1.0"
+    "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.7"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",

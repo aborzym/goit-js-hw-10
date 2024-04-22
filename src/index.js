@@ -2,17 +2,15 @@ import { fetchBreeds, fetchCatByBreed, getCatPhotoByBreed } from './cat-api';
 import axios from 'axios';
 axios.defaults.headers.common['x-api-key'] =
 	'live_i91leozVNIE98NugOCrDU2RPcZl4xEUJguzWlynsfs5mQeJI4TAskccLiIN1comy';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const select = document.querySelector('select.breed-select');
 const loader = document.querySelector('p.loader');
 const error = document.querySelector('p.error');
 const display = document.querySelector('div.cat-info');
-select.classList.add('hidden');
-error.classList.add('hidden');
 
 fetchBreeds()
 	.then((data) => {
-		select.classList.remove('hidden');
 		loader.classList.add('hidden');
 		select.innerHTML = data.map(
 			(item) => `<option value="${item.id}">${item.name}</option>`
@@ -20,27 +18,31 @@ fetchBreeds()
 	})
 	.catch((err) => {
 		loader.classList.add('hidden');
-		error.classList.remove('hidden');
+		select.classList.add('hidden');
+		Notify.failure('Oops! Something went wrong! Try reloading the page!');
 		console.error('Error', err);
 		throw error;
 	});
 
 select.addEventListener('change', (ev) => {
-	if (!display.classList.contains('hidden')) display.classList.add('hidden');
+	display.classList.add('hidden');
 	let catData = {};
-	const breedID = ev.target.value;
+	const breedId = ev.target.value;
 	loader.classList.remove('hidden');
-	const promiseA = getCatPhotoByBreed(breedID)
+	const promiseA = getCatPhotoByBreed(breedId)
 		.then((photo) => {
 			catData.url = photo[0].url;
 		})
 		.catch((err) => {
+			select.classList.add('hidden');
 			loader.classList.add('hidden');
-			error.classList.remove('hidden');
-			console.error('Error', err);
+			Notify.failure(
+				`Oops! Something went wrong! Try reloading the page! (Error downloading photo)`
+			);
+			console.error('Error downloading photo.)', err);
 			throw error;
 		});
-	const promiseB = fetchCatByBreed(breedID)
+	const promiseB = fetchCatByBreed(breedId)
 		.then((catDescription) => {
 			const { name, description, temperament } = catDescription;
 			catData.name = name;
@@ -49,14 +51,17 @@ select.addEventListener('change', (ev) => {
 		})
 		.catch((err) => {
 			loader.classList.add('hidden');
-			error.classList.remove('hidden');
-			console.error('Error', err);
+			Notify.failure(
+				`Oops! Something went wrong! Try reloading the page! (Error downloading cat info.)`
+			);
+			console.error('Error downloading cat info', err);
 			throw error;
 		});
-	Promise.all([promiseA, promiseB]).then(() => {
-		loader.classList.add('hidden');
-
-		display.innerHTML = `<img
+	Promise.all([promiseA, promiseB])
+		.then(() => {
+			display.classList.remove('hidden');
+			loader.classList.add('hidden');
+			display.innerHTML = `<img
 				class="cat-info__photo"
 				src="${catData.url}"
 				alt="cat image"
@@ -68,5 +73,10 @@ select.addEventListener('change', (ev) => {
 				<p class="cat-temperament">
 					<span class="cat-temperament__name">Temperament: </span>${catData.temperament}
 				</p>`;
-	});
+		})
+		.catch((err) => {
+			loader.classList.add('hidden');
+			console.error('Error', err);
+			// throw error;
+		});
 });
